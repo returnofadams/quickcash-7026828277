@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,900&display=swap');
+
+* {
+    margin: 0 auto;
+}
+
+.content {
+    width: 92%;
+    background: #F2F2F2;
+    height: 630px;
+    border-radius: 1px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 19px;
+    padding: 5px;
+    padding-top: 20px;
+}
+
+body {
+    background: #2d3748;
+    font-family: 'Poppins', sans-serif;
+}
+
+.content button {
+    background: #4a5568;
+    width: 89%;
+    height: 45px;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.content::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #2d3748;
+    clip-path: polygon(0 100%, 10% 0, 20% 100%, 30% 0, 40% 100%, 50% 0, 60% 100%, 70% 0, 80% 100%, 90% 0, 100% 100%);
+}
+
+strong {
+    color: #050505;
+}
+
+.copy-icon {
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 1px;
+}
+
+.popup {
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px 0;
+    position: fixed;
+    z-index: 1;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    font-size: 16px;
+}
+
+.popup.show {
+    visibility: visible;
+    animation: fadeInOut 2s forwards;
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0;
+    }
+    10%, 90% {
+        opacity: 1;
+    }
+}
+
+/* Overlay and Popup styles */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: none;
+}
+
+.popup-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 1001;
+    display: none;
+    width: 270px;
+}
+
+.popup-container img {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.popup-container button {
+    background: #F3A018;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.popup .close-btn, .popup-container .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    background: none;
+    border: none;
+    font-size: 25px;
+    color: #fff;
+}
+
+.popup-container .close-btn {
+    color: #555;
+}
+</style>
+<body>
+  <div class="content">
+    <img src="quick.jpeg" alt="pay.png" style="width: 50px; clip-path: circle(); float: left; margin-left: 10px;">
+    <h3 style="float: right; padding-right: 14px; padding-top: 6px;">QuickCash</h3>
+    <br><br><br>
+    <hr>
+    <p style="text-align: center; padding: 15px; color: #7B7B7B;">Please proceed to your mobile banking app to complete your bank transfer to <strong style="color: #7B7B7B;">QuickCash</strong></p>
+    <br><br>
+    <strong style="padding-left: 14px; float: left;">Amount:</strong>
+    <strong style="padding-right: 14px; float: right;">NGN15,000</strong>
+    <br><br>
+    <hr style="background-color: #7B7B7B;">
+    <br>
+    <strong style="padding-left: 6px; float: left; font-size: 16px;">Account No:</strong>
+    <strong style="padding-right: 0px; float: right; font-size: 16px;" id="account-number">
+      6101759206<span class="copy-icon" onclick="copyToClipboard()">📋</span>
+    </strong>
+    <div id="popup" class="popup">Account number copied</div>
+    <br><br>
+    <hr>
+    <br>
+    <strong style="padding-left: 14px; float: left;">Bank:</strong>
+    <strong style="padding-right: 14px; float: right;">OPay</strong>
+    <br><br><br><br>
+    <center>
+      <button onclick="showPaymentPopup()">I have completed the transfer</button>
+    </center>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+  <div class="popup-container" id="paymentPopup">
+    <button class="close-btn" onclick="closePaymentPopup()">×</button>
+    <br>
+    <div id="popupContent">
+      <div id="loader">Payment confirming...</div>
+      <br>
+    </div>
+  </div>
+
+  <script>
+    function copyToClipboard() {
+      var accountNumber = document.getElementById("account-number").childNodes[0].textContent;
+      navigator.clipboard.writeText(accountNumber).then(function() {
+        var popup = document.getElementById("popup");
+        popup.classList.add("show");
+        setTimeout(function() {
+          popup.classList.remove("show");
+        }, 2000);
+      }, function(err) {
+        console.error('Async: Could not copy text: ', err);
+      });
+    }
+
+    function showPaymentPopup() {
+      document.getElementById("overlay").style.display = "block";
+      document.getElementById("paymentPopup").style.display = "block";
+      setTimeout(showPaymentFailure, 10000);
+    }
+
+    function showPaymentFailure() {
+      var popupContent = document.getElementById("popupContent");
+      popupContent.innerHTML = '<img src="nope.png" alt="Payment Failed"><p>Payment Faild, Go back and make your payments to process this transaction. <br><a href="https://wa.me/+2348126206996">Chat Us</a></p>';
+    }
+
+    function closePaymentPopup() {
+      document.getElementById("overlay").style.display = "none";
+      document.getElementById("paymentPopup").style.display = "none";
+    }
+  </script>
+</body>
+
+</html>

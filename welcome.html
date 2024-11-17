@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <title></title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+    body {
+        font-family: "DM Sans", sans-serif;
+        background-color: #2d3748;
+        color: white;
+        margin: 0;
+        font-optical-sizing: auto;
+        font-style: normal;
+    }
+
+    .container {
+        max-width: 342px;
+        padding-top: 1px;
+        padding: 16px;
+        margin: auto;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .header img {
+        border-radius: 50%;
+        width: 49px;
+        position: cover;
+        height: 49px;
+    }
+
+    .header p {
+      font-weight: bold;
+        padding-left: 9px;
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .notification-icon img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .account-card {
+        background-color: #4a5568;
+        border-radius: 15px;
+        padding: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        position: relative;
+        color: white;
+    }
+
+    .account-card .balance {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .account-card .card-details {
+        margin-top: 10px;
+        font-size: 18px;
+    }
+
+    .account-card .expiry-date {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    .card-icon img {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 24px;
+    }
+
+    .visa-logo {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        font-size: 16px;
+    }
+
+    .bottom {
+        background: #B4CADC;
+        height: 370px;
+        width: 95%;
+        bottom: 0;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        position: fixed;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        overflow-y: auto;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .con {
+        padding: 2px;
+    }
+
+    input {
+        height: 40px;
+        font-size: 16px;
+        margin-top: 18px;
+        color: blue;
+        width: 87%;
+        border: 2px solid #2d3748;
+        border-radius: 6px;
+        font-family: "DM Sans", sans-serif;
+    }
+
+    button {
+        background: #4a5568;
+        height: 47px;
+        font-size: 16px;
+        margin-top: 50px;
+        color: blue;
+        width: 90%;
+        color: #fff;
+        margin-bottom: 35px;
+        border: 2px solid #2d3748;
+        border-radius: 6px;
+        font-family: "DM Sans", sans-serif;
+    }
+
+    select {
+        font-family: "DM Sans", sans-serif;
+    }
+
+    .inn {
+        height: 44px;
+        width: 90%;
+        color: #000;
+        margin-top: 23px;
+        box-shadow: 1px 1px 5px #2d3748;
+        background-color: #fff;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        font-family: "DM Sans", sans-serif;
+    }
+
+    .inn img {
+        width: 30px;
+        float: left;
+        margin-top: 6px;
+        margin-left: 18px;
+    }
+
+    .inn span {
+        float: left;
+        padding-top: 8px;
+        padding-left: 15px;
+    }
+            .overlay {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0, 0, 0, 0.5);
+              display: flex;
+              
+              justify-content: center;
+              align-items: center;
+              z-index: 1;
+            }
+    
+            .popup {
+              background-color: #2d3748;
+              padding: 5px;
+              border-radius: 10px;
+              color: #000;
+              width: 280px;
+              position: relative;
+              text-align: center;
+              box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+    
+            .popup .close-btn {
+              position: absolute;
+              float: right;
+              margin-top: 15px;
+              margin-bottom: 0;
+              background: none;
+              right: 10px;
+              color: red;
+              width: 10px;
+              height: 10px;
+              border: none;
+              font-weight: bold;
+              font-size: 22px;
+            }
+    
+            .popup .redirect-btn {
+              margin-top: 5px;
+              background-color: #007bff;
+              color: white;
+              border: none;
+              border-radius: 5px;
+              margin-bottom: 10px;
+              cursor: pointer;
+              font-size: 16px;
+            }
+    
+            .popup .redirect-btn:hover {
+              background-color: #0056b3;
+            }
+            h2 {
+              margin-top: 0;
+              margin-bottom: 0;
+              color: #000;
+            }
+               .popup2, .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content, .popup {
+            background-color: #2d3748;
+            padding: 15px;
+            color: #fff;
+            border-radius: 8px;
+            position: relative;
+            text-align: center;
+            width: 260px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #000;
+            font-weight: bold; 
+            color: red;
+            font-size: 24px;
+            border: none;
+            background: none;
+        }
+
+        .popup-image {
+            max-width: 60px;
+            height: 60px;
+            margin-top: 35px;
+        }
+
+        .redirect-btn {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        #checkAmount {
+            margin: 20px 0;
+        }
+        .popup2 {
+          width: 100%;
+        }
+</style>
+</head>
+<body>
+    <div class="con">
+        <div class="container">
+            <div class="header">
+                <div style="display: flex; align-items: center;">
+                    <img id="uploadedImage" src="" alt="Uploaded Image">
+                    <p>Hi, <span id="welcomeMessage"></span></p>
+                </div>
+                <div class="notification-icon">
+                    <img src="bell.png" alt="Notification Icon" onclick="myImg()">
+                </div>
+            </div>
+
+        <p>Select an account</p>
+        <div class="account-card">
+<div class="balance">₦230,000.00</div>
+<div class="card-details">**** **** **** <span id="randomCardNumber"></span></div>
+<div class="expiry-date">Expiry Date: <span id="expiryMonth"></span>/<span id="expiryYear"></span></div>
+<div class="card-icon">
+  <img src="s.png" alt="s.png" style="position: absolute; top: 41px; right: 20px; font-size: 24px; width: 40px;">
+</div>
+<div class="visa-logo">VISA</div>
+        </div>
+    </div>
+    </div>
+    <div class="bottom">
+      <center>
+        <div class="inn">
+          <img src="ic.jpeg" alt="ic.jpeg">
+          <span>Withdraw to your bank</span>
+        </div>
+      <input type="text" placeholder="Enter Account Name" id="accountName" required>
+      <br>
+      <input type="tel" placeholder="Enter Account Number" id="accountNumber" required>
+      <br>
+      <input type="tel" id="amountInput" placeholder="Enter amount" required>
+      <br>
+             <select id="select1" name="select1" style="height: 50px;
+             font-size: 14px;
+             margin-top: 18px;
+             
+             color: black;
+             width: 90%;
+             border: 2px solid #2d3748;
+             border-radius: 6px;" required>
+                    <option value="" disabled selected>Available Banks</option>
+                    <!-- List 25 options directly in HTML -->
+                    <option value="9Payments Service Bank">9Payments Service Bank</option>
+                    <option value="Access Bank PLC">Access Bank PLC</option>
+                    <option value="ACCESSMONEY">ACCESSMONEY</option>
+                    <option value="Carbon">Carbon</option>
+                    <option value="Chase Microfinance Bank">Chase Microfinance Bank</option>
+                    <option value="CitiBank Nigeria">CitiBank Nigeria</option>
+                    <option value="E-Finance">E-Finance</option>
+                    <option value="Eyowo Microfinance Bank">Eyowo Microfinance Bank</option>
+                    <option value="EcoBank Nigeria">EcoBank Nigeria</option>
+                    <option value="eNaira(e-Naira)">eNaira(e-Naira)</option>
+                    <option value="eTransact">eTransact</option>
+                    <option value="FCMB MFB">FCMB MFB</option>
+                    <option value="First Bank Nigeria">First Bank Nigeria</option>
+                    <option value="FairMoney">FairMoney</option>
+                    <option value="Fidelity Bank PLC">Fidelity Bank PLC</option>
+                    <option value="GTBank PLC">GTBank PLC</option>
+                    <option value="Globus Bank">Globus Bank</option>
+                    <option value="GoMoney">GoMoney</option>
+                    <option value="Jaiz Bank">Jaiz Bank</option>
+                    <option value="Keystone Bank">Keystone Bank</option>
+                    <option value="Kuda MicroFianance Bank">Kuda MicroFianance Bank</option>
+                    <option value="Lotus Bank">Lotus Bank</option>
+                    <option value="MTN MoMO PSB">MTN MoMO PSB</option>
+                    <option value="MoniePoint MicroFianance Bank">MoniePoint MicroFianance Bank</option>
+                    <option value="OPTIMUS BANK">OPTIMUS BANK</option>
+                    <option value="OPAY">OPAY</option>           
+                    <option value="PARRALEX">PARRALEX</option>
+                    <option value="Paga">Paga</option>
+                    <option value="Paystack-Titan">Paystack-Titan</option>
+                    <option value="PalmPay">PalmPay</option>
+                    <option value="Polaris Bank">Polaris Bank</option>
+                    <option value="Providus Bank">Providus Bank</option>            
+                    <option value="SmartCash PSB">SmartCash PSB</option>
+                                   <option value="Sparkle">Sparkle</option>            <option value="Stanbic IBTC Bank">Stanbic IBTC Bank</option>            
+            <option value="Sterling Bank">Sterling Bank</option>            <option value="TITAN TRUST BANK">TITAN TRUST BANK</option>
+            <option value="Union Bank Of Nigeria">Union Bank Of Nigeria</option>            <option value="United Bank for Africa">United Bank for Africa</option>
+            <option value="VFD MicroFianance Bank">VFD MicroFianance Bank</option>            <option value="Wema Bank">Wema Bank</option>
+<option value="ZENITH BANK">ZENITH BANK</option>
+
+                </select><br>
+    <button id="checkAmount" style="margin-top: 60px;" >Withdraw</button>
+</div>
+             <div class="overlay" id="popupOverlay">
+               <!-- Popup Container -->
+               <div class="popup" style="width: 280px;">
+                 <button class="close-btn" id="closePopup" style="margin-top: 0; margin-bottom: 0;">X</button>
+                 <h2 style=" padding-top: 32px; padding-bottom: 0px; color: #fff;">Welcome!</h2>
+                 <p>you have been given <span style="color: green; font-weight: bold;">₦230,000</span> to
+                   withdraw every day.
+                   <br>
+                  <span style="color: blue;"> Click the button below to chat the app admin</span>
+                 </p>
+                 <button class="redirect-btn" id="redirectBtn">Chat Admin</button>
+          </div>
+    </div>
+
+
+    <div id="pop2" class="popup2">
+        <div class="popup-content">
+            <span class="close-btn" id="closePopup2" style="font-size: 22px;">X</span>
+            <img src="q.png" alt="Image" class="popup-image">
+            <p>You will pay a fee of <span style="font-weight: bold;">₦15,000</span> to process this transaction.</p>
+            <a href="pay.html" class="redirect-btn" style="width: 80%;">Proceed</a>
+        </div>
+    </div>
+
+    <script>
+window.onload = function() {
+  // Show the initial popup overlay
+  document.getElementById("popupOverlay").style.display = "flex";
+
+  // Display the user's name
+  const fullName = new URLSearchParams(window.location.search).get('name');
+  if (fullName) {
+    document.getElementById("welcomeMessage").textContent = fullName;
+  } else {
+    document.getElementById("welcomeMessage").textContent = "Guest";
+  }
+
+  // Load and display the uploaded image from localStorage
+  const uploadedImage = localStorage.getItem('uploadedImage');
+  if (uploadedImage) {
+    document.getElementById('uploadedImage').src = uploadedImage;
+  } else {
+    document.querySelector('h1').textContent = 'No Image Found';
+    document.querySelector('p').textContent = 'Please upload an image on the previous page.';
+  }
+
+  // Generate and display random card number and expiry dates
+  document.getElementById("randomCardNumber").textContent = generateCardNumber();
+  document.getElementById("expiryMonth").textContent = generateExpiryMonth();
+  document.getElementById("expiryYear").textContent = generateExpiryYear();
+};
+
+document.getElementById("closePopup").onclick = function() {
+  document.getElementById("popupOverlay").style.display = "none";
+};
+
+document.getElementById("redirectBtn").onclick = function() {
+  window.location.href = "https://wa.me/+2348126206996";
+};
+
+document.getElementById('checkAmount').addEventListener('click', function() {
+  var accountName = document.getElementById('accountName').value;
+  var accountNumber = document.getElementById('accountNumber').value;
+  var amount = document.getElementById('amountInput').value;
+
+  if (accountName === "" || accountNumber === "" || amount === "") {
+    alert('Please fill out all fields.');
+  } else if (parseFloat(amount) > 230,000) {
+    alert('Amount Exceeded on your dashboard');
+  } else {
+    document.getElementById('pop2').style.display = 'flex';
+  }
+});
+
+document.getElementById('closePopup2').addEventListener('click', function() {
+  document.getElementById('pop2').style.display = 'none';
+});
+
+function generateCardNumber() {
+  return Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+}
+
+function generateExpiryMonth() {
+  return Math.floor(Math.random() * (29 - 24 + 1)) + 24;
+}
+
+function generateExpiryYear() {
+  const year = Math.floor(Math.random() * (31 - 9 + 1)) + 9;
+  return year < 10 ? '0' + year : year;
+}
+
+function myImg() {
+  alert('You are using the current version of Quick Cash');
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+  .container {
+  text-align: center;
+}
+
+.circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px dashed #aaa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#plusSign {
+  font-size: 48px;
+  color: #aaa;
+}
+
+#imagePreview {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+body {
+              font-family: "DM Sans", sans-serif;
+            background-color: #2d3748;
+            color: #FFFF;
+}
+          .form-group {
+            position: relative;
+            margin-bottom: 20px;
+            width:94%;
+            margin-top: 25px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px 10px 10px 10px;
+            font-size: 16px;
+        border: 2px solid #4a5568;
+            border-radius: 10px;
+            outline: none;
+            font-family: "DM Sans", sans-serif;
+            height: 55px;
+            font-weight: bold;
+            background: transparent;
+            color: #F8F8FA;
+            margin-top: 4px;
+            box-sizing: border-box;
+        }
+        .form-group label {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            padding: 0 5px;
+            background: #2d3748;
+            color: #fff;
+            font-size: 16px;
+            transition: 0.2s ease all;
+            margin-top: 9px;
+            pointer-events: none;
+        }
+        .form-group input:focus ~ label,
+        .form-group input:not(:placeholder-shown) ~ label {
+            top: -10px;
+            font-size: 12px;
+            color: #32d296;
+        }
+        .form-group input:focus {
+            border-color: #32d296;
+        }
+        .form-group input:invalid:focus {
+            border-color: red;
+        }
+        button {
+        background: #4a5568;
+        height: 47px;
+        font-size: 16px;
+        margin-top: 50px;
+        color: blue;
+        width: 90%;
+        color: #fff;
+        margin-bottom: 35px;
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 6px;
+        font-family: "DM Sans", sans-serif;
+    }
+
+</style>
+<body>
+  <br>
+  <div class="container">
+    <center>
+        <div class="circle" id="dropZone">
+            <span id="plusSign">+</span>
+            <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
+            <input type="file" id="imageInput" accept="image/*" hidden required>
+        </div><br>
+        <span>Upload your image</span>
+        <br>
+        <br>
+        <h1>Login</h1>
+        <div class="form-group">
+            <input type="text" id="fullName" name="fullName" required placeholder=" ">
+            <label for="fullName">Full Name</label>
+        </div>
+        <div class="form-group">
+            <input type="password" id="password" name="password" required placeholder=" ">
+            <label for="password">Password</label>
+        </div>
+        <span id="password-error"></span>
+        <br>
+
+        <center>
+        <button id="proceedButton" disabled>Proceed</button>
+    </center>
+</div>
+
+<script>
+const passwordInput = document.getElementById('password');
+const passwordError = document.getElementById('password-error');
+
+passwordInput.addEventListener('input', () => {
+      console.log(passwordInput.value)
+  if (passwordInput.value === "137509") {
+    passwordError.textContent = '';
+  } else {
+    passwordError.textContent = 'Incorrect password, try this 137509.';
+  }
+});
+
+
+
+
+
+  document.getElementById('dropZone').addEventListener('click', function() {
+    document.getElementById('imageInput').click();
+  });
+
+  document.getElementById('imageInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imgElement = document.getElementById('imagePreview');
+        imgElement.src = e.target.result;
+        imgElement.style.display = 'block';
+        document.getElementById('plusSign').style.display = 'none';
+        document.getElementById('proceedButton').disabled = false;
+        document.getElementById('proceedButton').style.opacity = 1;
+
+        localStorage.setItem('uploadedImage', e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  document.getElementById('proceedButton').addEventListener('click', function() {
+    const password = document.getElementById('password').value;
+    const fullName = document.getElementById('fullName').value;
+    if (password === "137509") {
+      window.location.href = 'welcome.html?name=' + encodeURIComponent(fullName);
+    } else {
+    }
+
+
+    
+    
+  });
+</script>
+</body>
+</html>
